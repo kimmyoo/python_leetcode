@@ -1,0 +1,47 @@
+class Solution(object):
+    def threeSum(self, nums):
+        """
+        :type nums: List[int]
+        :rtype: List[List[int]]
+        """
+        nums.sort()
+        res = []
+        ## i's index is from 0 to the 2nd to the last 
+        for i in range(len(nums) - 2):
+			## this condition will skip i's next element if i's next element
+			## is equal to i. 
+            if i == 0 or (i > 0 and nums[i - 1] != nums[i]):
+                left = i + 1 # set index of left end
+                right = len(nums) - 1  # set the index of right end
+                # the inner loop lasts while left index is less than right
+                while left < right:
+                    s = nums[i] + nums[left] + nums[right]
+                    if s == 0:
+                        res.append([nums[i], nums[left], nums[right]])
+                        left += 1 # increment left index
+                        right -= 1 # decrement right index
+                        # these two while loops deal with adjacent equal values 
+                        # on both ends
+                        while left < right and nums[left] == nums[left - 1]:
+                            left += 1
+                        while right > left and nums[right] == nums[right + 1]:
+                            right -= 1
+                    # if the sum is less than 0, then we increment 
+                    # left index (try to increase the sum a bit)
+                    elif s < 0:
+                        left += 1
+                    # if the sum is greater than 0, then we decrement 
+                    # right index (try to decrease the sum a bit) since
+                    # the list is sorted. 
+                    else:
+                        right -= 1
+        return res
+
+
+intlist = [4, -4, 0, 9, -9, 0]
+sol = Solution()
+res = sol.threeSum(intlist)
+print (res)
+
+
+尝试写一下 two sum
