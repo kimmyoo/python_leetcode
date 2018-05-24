@@ -25,7 +25,7 @@ class Solution(object):
             node.val = node.next.val
             node.next = node.next.next
 
-# test 
+# test must be implemented!!
 tail = ListNode(4, None)
 node3 = ListNode(3, tail)
 node2 = ListNode(2, node3)
