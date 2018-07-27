@@ -49,6 +49,28 @@ class Solution(object):
             if root.left is not None:
                 stack.append(root.left)
         return path
+        
+    def postorderTraversal(self, root):
+        """
+        :type root: TreeNode
+        :rtype: List[int]
+        """
+        path = []
+        if root is None:
+            return path
+        stack1 = []
+        stack2 = []
+        stack1.append(root)
+        while stack1:
+            root = stack1.pop()
+            stack2.append(root.val)
+            if root.left is not None:
+                stack1.append(root.left)
+            if root.right is not None:
+                stack1.append(root.right)
+        while stack2:
+            path.append(stack2.pop())
+        return path
 
 #test
 node3 = TreeNode(3, None, None)
@@ -58,4 +80,6 @@ root = TreeNode (1, node1, node2)
 
 s = Solution ()
 path = s.preorderTraversal(root)
+print (path)
+path = s.postorderTraversal(root)
 print (path)
