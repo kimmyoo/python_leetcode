@@ -30,28 +30,48 @@ class TreeNode(object):
         self.right = None
 
 class Solution(object):
-    arr = []
-    def preOrderSerialize(self, node):
-        if node:
-            self.arr.append(node.val)
-            self.preOrderSerialize(node.left)
-            self.preOrderSerialize(node.right)
-
     def searchBST(self, root, val):
-        """
-        :type root: TreeNode
-        :type val: int
-        :rtype: TreeNode
-        """
-        if root:
+        #~ :type root: TreeNode
+        #~ :type val: int
+        #~ :rtype: TreeNode
+        while root:
             if root.val == val:
-                self.preOrderSerialize(root)
+                return root
             elif val < root.val:
-                self.searchBST(root.left, val)
+                root = root.left
             else:
-                self.searchBST(root.right, val)
-        return self.arr
+                root = root.right
 
+    def preorderTraversal(self, root):
+        """
+        type root: TreeNode
+        rtype: list
+        """
+        res = []
+        if root:
+            res.append(root.val)
+            res.extend(self.preorderTraversal(root.left))
+            res.extend(self.preorderTraversal(root.right))
+        return res
+
+    def inorderTraveral(self, root):
+        res = []
+        if root.left:
+            res = res + self.inorderTraveral(root.left)
+        res.append(root.val)
+        if root.right:
+            res = res + self.inorderTraveral(root.right)
+        return res
+    
+    def postorderTraveral(self, root):
+        res = []
+        if root.left:
+            res = res + self.postorderTraveral(root.left)
+        if root.right:
+            res = res + self.postorderTraveral(root.right)
+        res.append(root.val)
+        return res
+    
     def arrToBst(self, A):
         """
         type A: list
@@ -66,27 +86,46 @@ class Solution(object):
         root.left = self.arrToBst(A[:mid])
         root.right = self.arrToBst(A[mid+1:])
         return root
+    
+    def trimBST(self, root, L, R):
+        """
+        type root: TreeNode
+        type L, R: int; L and R are left and right key boundaries
+        rtype: TreeNode
+        """
+        def trim(root):
+            if not root:
+                return None
+            # If the value of this node is greater than R, then the 
+            # whole right subtree will be greater
+            # so we can discard the right sub tree and return the root 
+            # of the trimmed left sub tree
+            elif root.val > R:
+                return trim(root.left)
+            # If the value of this node is less than L, then the whole 
+            # left subtree will be smaller, 
+            # so we can discard the left sub tree and return the root 
+            # of the trimmed right sub tree 
+            elif root.val < L:
+                return trim(root.right)
+            # If the value of this node does not need to be trimmed
+            # we need to pass this recursive call downwards to both sides
+            root.left = trim(root.left)
+            root.right = trim(root.right)
+            return root
+        return trim(root)
 
 #test code
 s = Solution()
-A = [i for i in range(100)]
+A = [i for i in range(10)]
 tree = s.arrToBst(A)
 res = s.searchBST(tree, 25)
-print(res)
-
-
-"""
-    #leetcode solution
-    def searchBST(self, root, val):
-        #~ :type root: TreeNode
-        #~ :type val: int
-        #~ :rtype: TreeNode
-        while root:
-            if root.val == val:
-                return root
-            elif val < root.val:
-                root = root.left
-            else:
-                root = root.right
-
-"""
+print("trying ot find 25:", res)
+preorderTr = s.preorderTraversal(tree)
+inorderTr = s.inorderTraveral(tree)
+postorderTr = s.postorderTraveral(tree)
+trimmedTree = s.trimBST(tree, 2, 8)
+print("pre-order:", preorderTr)
+print("in-order:", inorderTr)
+print("post-order:", postorderTr)
+print("trimmed tree is:", s.inorderTraveral(trimmedTree), "root:", trimmedTree.val)

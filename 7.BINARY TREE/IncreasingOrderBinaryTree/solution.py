@@ -59,6 +59,10 @@ class Solution(object):
     
     
     def inOrderTraversalToArray(self, root, A):
+        """
+        in order traversal to add elements to List A
+        type A: TreeNode, List
+        """
         if not root:
             return
         if root.left:
@@ -68,6 +72,10 @@ class Solution(object):
             self.inOrderTraversalToArray(root.right, A)
         
     def arrayToBst(self, A):
+        """
+        type A: List
+        rtype: TreeNode
+        """
         root = TreeNode(A.pop(0))
         while len(A) > 0:
             root.right = self.arrayToBst(A)
