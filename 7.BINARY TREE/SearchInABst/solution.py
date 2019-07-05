@@ -3,7 +3,7 @@ Given the root node of a binary search tree (BST) and a value.
 You need to find the node in the BST that the node's value equals 
 the given value. Return the subtree rooted with that node. 
 If such node doesn't exist, you should return NULL.
-
+ 
 For example, 
 Given the tree:
         4
@@ -11,7 +11,7 @@ Given the tree:
       2   7
      / \
     1   3
-
+ 
 And the value to search: 2
 You should return this subtree:
       2     
@@ -28,7 +28,7 @@ class TreeNode(object):
         self.val = x
         self.left = None
         self.right = None
-
+ 
 class Solution(object):
     def searchBST(self, root, val):
         #~ :type root: TreeNode
@@ -41,7 +41,7 @@ class Solution(object):
                 root = root.left
             else:
                 root = root.right
-
+ 
     def preorderTraversal(self, root):
         """
         type root: TreeNode
@@ -53,7 +53,7 @@ class Solution(object):
             res.extend(self.preorderTraversal(root.left))
             res.extend(self.preorderTraversal(root.right))
         return res
-
+ 
     def inorderTraveral(self, root):
         res = []
         if root.left:
@@ -62,7 +62,7 @@ class Solution(object):
         if root.right:
             res = res + self.inorderTraveral(root.right)
         return res
-    
+     
     def postorderTraveral(self, root):
         res = []
         if root.left:
@@ -71,7 +71,7 @@ class Solution(object):
             res = res + self.postorderTraveral(root.right)
         res.append(root.val)
         return res
-    
+     
     def arrToBst(self, A):
         """
         type A: list
@@ -86,7 +86,7 @@ class Solution(object):
         root.left = self.arrToBst(A[:mid])
         root.right = self.arrToBst(A[mid+1:])
         return root
-    
+     
     def trimBST(self, root, L, R):
         """
         type root: TreeNode
@@ -115,6 +115,40 @@ class Solution(object):
             return root
         return trim(root)
 
+    def maxDepth(self, root):
+        """
+        :type root: TreeNode
+        :rtype: int
+        """
+        if root is None:
+            return 0
+        maxleft = self.maxDepth(root.left)
+        maxright = self.maxDepth(root.right)
+        return maxright +1 if maxleft < maxright else maxleft + 1
+    
+    # iterative method
+    def maxDepth2(self, root):
+        """
+        :type root: TreeNode
+        :rtype: int
+        """
+        if not root:
+            return 0
+        
+        tempStack, h = [root], 0
+        while tempStack:
+            nextLevel = []
+            while tempStack:
+                top = tempStack.pop()
+                if top.left:
+                    nextLevel.append(top.left)
+                if top.right:
+                    nextLevel.append(top.right)
+            tempStack = nextLevel
+            h += 1
+        return h
+
+
 #test code
 s = Solution()
 A = [i for i in range(10)]
@@ -125,7 +159,12 @@ preorderTr = s.preorderTraversal(tree)
 inorderTr = s.inorderTraveral(tree)
 postorderTr = s.postorderTraveral(tree)
 trimmedTree = s.trimBST(tree, 2, 8)
+maxD1 = s.maxDepth(tree)
+maxD2 = s.maxDepth2(tree)
+
+
 print("pre-order:", preorderTr)
 print("in-order:", inorderTr)
 print("post-order:", postorderTr)
 print("trimmed tree is:", s.inorderTraveral(trimmedTree), "root:", trimmedTree.val)
+print("max depth of tree:", maxD1, maxD2)

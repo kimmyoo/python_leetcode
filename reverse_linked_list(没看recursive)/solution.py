@@ -10,6 +10,13 @@ class ListNode(object):
     def __init__(self, x, next):
         self.val = x
         self.next = next
+        
+ class ListNode(object):
+     def __init__(self, x):
+         self.val = x
+         self.next = None
+
+
 
 # Iterative method
 class Solution(object):
@@ -63,6 +70,24 @@ class Solution(object):
             head = next_node
         return res
 
+    def reverseList2(self, head):
+        """
+        :type head: ListNode
+        :rtype: ListNode
+        """
+        prev = None
+        curr = head
+        
+        while curr:
+            temp = curr.next
+            curr.next = prev
+            prev = curr
+            curr = temp
+        
+        return prev
+
+
+
 # test   stunog
 node6 = ListNode('g', None)
 node5 = ListNode('0', node6)
@@ -81,4 +106,5 @@ s = Solution()
 newHead = s.reverseList(head)
 print("singly linked list after reversal:")
 display(newHead)
+
 
