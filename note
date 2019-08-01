@@ -1,0 +1,13 @@
+import string
+string.ascii_lowercase
+string.ascii_uppercase
+
+eg.
+s = string.ascii_uppercase
+for l in s:
+    print (l)
+
+---------------------
+ord(char)
+chr(int)
+---------------------

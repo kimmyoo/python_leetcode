@@ -10,7 +10,9 @@ class Solution(object):
         :type nums: List[int]
         :rtype: bool
         """
+        # space: O(n)
         d = set()
+        # O(n)
         for i in nums:
             if i in d:
                 return True
@@ -18,6 +20,22 @@ class Solution(object):
                 d.add(i)
         return False
 
+    #this is actually slower
+    #but less memory
+    def containsDuplicate2(self, nums):
+        """
+        :type nums: List[int]
+        :rtype: bool
+        """
+        if len(nums) == 0:
+            return False
+        #O（nlog(n)）
+        nums.sort()
+        #O (n)
+        for i in range(0, len(nums)-1):
+            if nums[i] == nums[i+1]:
+                return True
+        return False
 #test is important and it goes here
 test_array_a = [5, 10, 2018, 22, 33, 3]
 test_array_b = [3, 2, 1, 1]
