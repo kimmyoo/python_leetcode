@@ -13,23 +13,17 @@ if first bill is larger than 5 return false
 for bill in bills
     if bill is 5:
         update numof5, 
-        update sum
     elif  bill is 10: 
         if numof5 is == 0:
             return false
         update numof10  +=1
         update numof5   -=1
-        update sum
     elif bill is 20:
-        if sum < 15:
-            return false
         if numof10 >=1 and numof5 >= 1:
             update numof10
             update numof5
-            update sum
         elif numof10 < 1 and numof5 >= 3
             update numof5 -=3
-            update sum
         else:
             return false
 return true
