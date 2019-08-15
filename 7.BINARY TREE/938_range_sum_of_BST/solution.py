@@ -15,7 +15,7 @@ class Solution(object):
     
     def inOrderTraversal(self, root, L, R):
         if root:
-            # don't go through the whole tree!
+            # don't go through the left subtree if root.val < L
             if root.val > L:
                 self.inOrderTraversal(root.left, L, R)
             if L <= root.val <= R:
