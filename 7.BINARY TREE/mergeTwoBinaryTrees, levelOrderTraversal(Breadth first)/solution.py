@@ -95,6 +95,7 @@ def levelOrderList(root):
         queue_size = len(queue)
         i = 0
         level_result = []
+        #use q_size to control level count
         while i < queue_size:
             node = queue.pop(0)
             if node:
