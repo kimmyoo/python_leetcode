@@ -1,3 +1,11 @@
+"""
+Given two strings S and T, return if they are equal when both are typed into empty text editors. 
+# means a backspace character.
+Example:
+Input: S = "ab#c", T = "ad#c"
+Output: true
+Explanation: Both S and T become "ac".
+"""
 class Solution(object):
     def backspaceCompare(self, S, T):
         """
@@ -5,7 +13,11 @@ class Solution(object):
         :type T: str
         :rtype: bool
         """
-        #my own solution. check out stack implementation
+        #my own solution: transform the string into list in reversed order
+        #when you see a '#' update counter to remember how many "#" has been met
+        #ignore corresponding times of char in reverse order. 
+        #then compare two transformed lists
+        # check out stack implementation! and how to implement in o(1) space and o(n) time
         def transformToList(string):
             #counter is used to remember how many "#" has been met
             temp, counter = [], 0
