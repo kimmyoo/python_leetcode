@@ -20,9 +20,7 @@ class Solution(object):
         for factor in factors:
             while num % factor == 0:
                 num /= factor
-        if num == 1:
-            return True
-        return False
+        return num == 1
 
 
 s = Solution()

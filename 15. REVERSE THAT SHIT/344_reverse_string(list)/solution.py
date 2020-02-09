@@ -19,7 +19,7 @@ class Solution(object):
     
 s = Solution()
 strA= ["h","e","l","l","o"]
+strB = "hello"
 s.reverseString(strA)
-print(strA)
-strA.reverse()
-print(strA)
+#reverse a string using slicing
+print(strA, strB[::-1])
