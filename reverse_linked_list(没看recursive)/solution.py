@@ -10,83 +10,23 @@ class ListNode(object):
     def __init__(self, x, next):
         self.val = x
         self.next = next
-        
- class ListNode(object):
-     def __init__(self, x):
-         self.val = x
-         self.next = None
 
-
-
-# Iterative method
 class Solution(object):
-    def reverseList(self, head):
-        """
-        :type head: ListNode
-        :rtype: ListNode
-        """
-        #head                                       res = None
-        # 1    ->   2    ->   3   ->   4 -> None
-        
-        #head     next_node
-        # 1    ->   2    ->   3   ->   4 -> None
-        
-        #head/res next_node
-#None <-  1    ->   2    ->   3   ->   4 -> None
-        #res    head/next_node
-#None <-  1    ->   2    ->   3   ->   4 -> None
-        # THE END OF FIRST WHILE LOOP
-        
-        # res      head    next_node
-#None <-  1    ->   2    ->   3   ->   4 -> None
-        # res      head    next_node
-#None <-  1    <-   2    ->   3   ->   4 -> None
-        #        res/head  next_node
-#None <-  1    <-   2    ->   3   ->   4 -> None
-        #          res    head/next_node
-#None <-  1    <-   2    ->   3   ->   4 -> None
-        #          res       head   next_node
-#None <-  1    <-   2    ->   3   ->   4 -> None
-        #          res       head   next_node
-#None <-  1    <-   2    <-   3   ->   4 -> None
-        #                  res/head next_node
-#None <-  1    <-   2    <-   3   ->   4 -> None
-        #                    res    head/next_node
-#None <-  1    <-   2    <-   3   ->   4 -> None
-#.........finally head will be moved to None; while loop stops. 
-
-        res = None
-        while head is not None:
-            next_node = head.next
-            # First node encountered
-            # this if condition is executed only once. 
-            if res is None:
-                res = head
-                res.next = None #connect the last node to None
-            else:
-                # this line is to change direction of linkage of current head 
-                head.next = res 
-                res = head
-            head = next_node
-        return res
-
     def reverseList2(self, head):
         """
         :type head: ListNode
         :rtype: ListNode
         """
-        prev = None
+        prev, nxt = None, None
         curr = head
         
         while curr:
-            temp = curr.next
+            nxt = curr.next
             curr.next = prev
             prev = curr
-            curr = temp
-        
-        return prev
-
-
+            curr = nxt
+        head = prev
+        return head
 
 # test   stunog
 node6 = ListNode('g', None)
@@ -98,12 +38,14 @@ head = ListNode('5', node2)
 
 def display(headNode):
     while headNode != None:
-        print(headNode.val)
+        print(headNode.val, end = '->'),
         headNode = headNode.next
+    print('None')
+
 print("original singly linked list:")
 display(head)
 s = Solution()
-newHead = s.reverseList(head)
+newHead = s.reverseList2(head)
 print("singly linked list after reversal:")
 display(newHead)
 
