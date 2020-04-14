@@ -21,10 +21,8 @@ class Solution(object):
         k = k % n # get the modulo
         # reverse entire list first, ==> u y f u s
         self.reverse(arr, 0, n - 1)
- 
         # reverse the first half now, from 0 to k -1, ==> y u f u s 
         self.reverse(arr, 0, k - 1)
-
         # reverse the other half, k to n-1, ==> y u s u f
         self.reverse(arr, k, n - 1)
         
@@ -36,6 +34,47 @@ class Solution(object):
             arr[i], arr[j] = arr[j], arr[i]
             i += 1
             j -= 1
+
+    def rotate2(self, nums, k):
+        """
+        :type nums: List[int]
+        :type k: int
+        :rtype: None Do not return anything, modify nums in-place instead.
+        """
+        if not nums:
+            return
+        l = len(nums)
+        k %= l
+        res = nums[len(nums)-k:]
+        res.extend(nums[:len(nums)-k])
+        for i in range(l):
+            nums[i] = res[i]
+    
+    def rotate3(self, nums, k):
+        """
+        :type nums: List[int]
+        :type k: int
+        :rtype: None Do not return anything, modify nums in-place instead.
+        Using Cyclic Replacements
+        """
+        
+        count, start = 0, 0
+        l = len(nums)
+        k = k % l
+        while count < l:
+            current = start
+            prev = nums[start]
+            while True:
+                print(start)
+                next = (current+k) % l
+                temp = nums[next]#save the ele in next spot
+                nums[next] = prev
+                prev = temp
+                current = next
+                count += 1
+                if start == current:
+                    break
+            start += 1
 
 # test goes here
 arrayList = ['s','u', 'f', 'y', 'u']
