@@ -4,7 +4,7 @@ class Solution(object):
         :type n: int
         :type k: int
         :rtype: List[List[int]]
-        refer to 78
+        refer to 78: subsets no duplicates
         """
         res = []
 
@@ -16,6 +16,5 @@ class Solution(object):
                 curr.append(i+1)
                 dfs(k, i+1, curr)
                 curr.pop()
-                
-        dfs(k, startIndex=0, curr=[])
+        dfs(k, 0, [])
         return res
