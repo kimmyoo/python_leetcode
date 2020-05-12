@@ -18,12 +18,9 @@ class Solution1(object):
             return 1
         res = self.fib1(N-1) + self.fib1(N-2)
         return res
-
-
     
     def fib_memo (self, N):
         memo = [None] * (N + 1)
-        
         def fb (N, memo):
             if memo[N]:
                 return memo[N]
@@ -33,7 +30,6 @@ class Solution1(object):
                 res = fb(N-1, memo) + fb(N-2, memo)
             memo[N] = res
             return res
-        
         return fb(N, memo)
 
 
@@ -42,9 +38,7 @@ class Solution1(object):
         fbSeq[1], fbSeq[2] = 1, 1
         for i in range(3, N+1):
             fbSeq[i] = fbSeq[i-1] + fbSeq[i-2]
-        
         return fbSeq[N]
-
 
 s = Solution1()
 resA = s.fib_memo(100) # 1000 will exceed the maximum recursion allowed.
