@@ -1,23 +1,26 @@
-class Solution(object):
-    def toLowerCase(self, str):
+"""
+solution to to_lowercase
+"""
+class Solution():
+    """
+    solution to to_lowercase
+    """
+    def to_lower_case(self, str):
         """
         :type str: str
         :rtype: str
         """
         #return str.lower()
-        strList = [ord (l) for l in str]
+        str_list = [ord(letter) for letter in str]
         res = ''
-        for l in strList:
-            if (l >= 65 and l <= 90):
-                l +=32
-                res += chr(l)
+        for letter in str_list:
+            if 65 <= letter <= 90:
+                letter += 32
+                res += chr(letter)
             else:
-                res += chr(l)
+                res += chr(letter)
         return res
- 
 
 s = Solution()
-lowered = s.toLowerCase("Bull$hit")
+lowered = s.to_lower_case("Bull$hit")
 print(lowered)
-
-
