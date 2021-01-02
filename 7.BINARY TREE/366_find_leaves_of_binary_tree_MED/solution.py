@@ -4,8 +4,10 @@ class TreeNode(object):
         self.left = None
         self.right = None
 
+from collections import defaultdict
+
 class Solution(object):
-    def findLeaves(self, root):
+    def findLeaves1(self, root):
         """
         :type root: TreeNode
         :rtype: List[int]
@@ -37,6 +39,24 @@ class Solution(object):
         if root.right:
             self.preOrder(root.right)
 
+    
+    #method 2: using dict to record each node's height
+    def findLeaves2(self, root):
+        def getHeightDfs(root, d):
+            if not root:
+                return -1
+            left = getHeightDfs(root.left, d)
+            right = getHeightDfs(root.right, d)
+            curHeight = max(left, right) + 1
+            d[curHeight].append(root.val)
+            return curHeight
+
+        res = []
+        HeightDict = defaultdict(list)  
+        getHeightDfs(root, HeightDict)
+        for key in sorted(HeightDict.keys()):
+            res.append(HeightDict[key])
+        return res
 
 
 root = TreeNode(10)
@@ -47,10 +67,9 @@ node1.left, node1.right = node3, node4
 root.left, root.right = node1, node2
 
 s = Solution()
-#s.preOrder(root)
-ans = s.findLeaves(root)
-print(ans)
+# #s.preOrder(root)
+# ans = s.findLeaves1(root)
+# print(ans)
 
-
-                    
-        
+res = s.findLeaves2(root)
+print(res)

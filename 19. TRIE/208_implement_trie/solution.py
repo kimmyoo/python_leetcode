@@ -6,7 +6,9 @@ class TrieNode:
         #it's dictionary key is the current node's char
         #val is the child TrieNode 
         #one node can have 26 key:val pair at most
-        self.children = collections.defaultdict(TrieNode)
+
+        #here we can use defaultdict(TrieNode) later we don't need to create TrieNode
+        self.children = dict()
         self.is_word = False
 
 class Trie:
@@ -16,6 +18,9 @@ class Trie:
     def insert(self, word):
         current = self.root
         for letter in word:
+            #if defaultdict is used, if conditional can be omitted.
+            if letter not in current.children:
+                current.children[letter] = TrieNode()
             current = current.children[letter]
         current.is_word = True
 
