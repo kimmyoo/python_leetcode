@@ -1,39 +1,36 @@
 class TrieNode:
     def __init__(self):
         self.children = {}
-        self.is_word = False
+        self.isWord = False
 
 class Trie:
     def __init__(self):
         self.root = TrieNode()
-
-    def insert(self, word):
-        current = self.root
-        for letter in word:
-            if letter not in current.children:
-                current.children[letter] = TrieNode()
-            current = current.children[letter]
-        current.is_word = True
-
-    def findPrefix(self, word):
-        """
-        :type word: str
-        :rtype: str
-        
-        if word starts with a prefix store in trie
-        the prefix of the word will be returned
-        otherwise, the word itself will be returned
-        """
-        current = self.root
-        out = ''
-        for letter in word:
-            if letter not in current.children:
+    
+    # build the trie with roots
+    def insert(self, rt):
+        cur = self.root
+        for ch in rt:
+            if ch not in cur.children:
+                cur.children[ch] = TrieNode()
+            cur = cur.children[ch]
+        # mark the end of word or root
+        cur.isWord = True
+    
+    # try to find the shortest root matching current word
+    def findPrefix(self, original):
+        output = ''
+        cur = self.root
+        for ch in original:
+            if ch not in cur.children:
                 break
-            current = current.children[letter]
-            out += letter
-            if current.is_word:
-                return out
-        return word
+            cur = cur.children[ch]
+            output += ch
+            # this is to ensure it will return the first met root(shortest)
+            if cur.isWord:
+                return output
+        return original
+        
 
 class Solution(object):
     def replaceWords(self, dict, sentence):
@@ -42,14 +39,16 @@ class Solution(object):
         :type sentence: str
         :rtype: str
         """
-        trie = Trie()
+        res = ''
+        t = Trie()
         for root in dict:
-            trie.insert(root)
-        res = ""
+            t.insert(root)
         for word in sentence.split():
             if len(res) > 0:
-                res+=" "
-            res += trie.findPrefix(word)
+                res += ' '
+            res += t.findPrefix(word)
+        # for k in t.root.children:
+        #     print(k, t.root.children[k].children.items())
         return res
 
 s = Solution()
