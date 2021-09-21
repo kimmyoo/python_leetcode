@@ -7,8 +7,9 @@ class Solution(object):
         :rtype: str
         """
 
-        # if you need an ordered dictionary, 
-        # you need to pass a list of tuple to OrderedDict constructor
+        # if you need an ordered dictionary, (OrderedDict will remember the insertion order)
+        # from python3.6 the default dictionary object is Ordered.
+        # you need to pass a list of tuple to OrderedDict constructor in order
         d = [
             (1000, 'M'), 
             (900, 'CM'), 
