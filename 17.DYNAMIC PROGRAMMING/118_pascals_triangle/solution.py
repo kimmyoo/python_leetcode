@@ -2,7 +2,7 @@
 Given a non-negative integer numRows, generate the first numRows of Pascal's triangle.
 """
 class Solution(object):
-    def generate(self, numRows):
+    def generateA(self, numRows):
         """
         :type numRows: int
         :rtype: List[List[int]]
@@ -19,8 +19,20 @@ class Solution(object):
             tri.append(temp)
         return tri
 
+    def generateB(self, numRows):
+        """
+        :type numRows: int
+        :rtype: List[List[int]]
+        """
+        tri = [[1] * i for i in range(1, numRows+1)]
+        
+        for i in range(2, len(tri)):
+            for j in range(1, len(tri[i])-1):
+                tri[i][j] = tri[i-1][j-1] + tri[i-1][j]
+        
+        return tri
 
 s = Solution()
-res = s.generate(9)
+res = s.generateB(9)
 for row in res:
     print(row)
