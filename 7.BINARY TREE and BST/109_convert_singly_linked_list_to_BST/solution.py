@@ -17,11 +17,13 @@ class Solution(object):
         :type head: ListNode
         :rtype: TreeNode
         """
+        # first convert the linked list to array
         sortedArray = []
         while head:
             sortedArray.append(head.val)
             head = head.next
         
+        # then recursively find the root, root.left and root.right
         def helper(left, right):
             if left > right:
                 return None
