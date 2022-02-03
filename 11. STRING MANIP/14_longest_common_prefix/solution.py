@@ -13,17 +13,26 @@ class Solution(object):
         :type strs: List[str]
         :rtype: str
         """
-        if not strs:
+        #思路: 横向比较
+        # 在list里找到最短的string的长度，
+        # 将前一个string的[0:minLen]和后一个string的[0:minLen]进行比较
+        # 如果一样不做任何处理
+        # 如果不一样 minLen -= 1 同时check minLen 是不是到0 如果到0 要break out of the while loop
+        # 最后返回 strs[0][:minLen]就可以
+        # 注意前面处理 edge cases， eg. strs list 为 0个或1个元素
+
+        # 知识点： min()函数可以有key argument 
+
+        minLen= len(min(strs, key=len))
+        if not strs or minLen==0:
             return ""
         if len(strs) == 1:
             return strs[0]
-        
-        minLen = float("inf")
-        
-        for str in strs:
-            minLen = min(minLen, len(str))
-        if minLen == 0:
-            return ""
+
+        # for str in strs:
+        #     minLen = min(minLen, len(str))
+        # if minLen == 0:
+        #     return ""
         
         i = 0
         while i < len(strs)-1:
@@ -32,7 +41,6 @@ class Solution(object):
             else:
                 i = 0
                 minLen-=1
-                #this break statement is important
                 if minLen == 0:
                     break
         return strs[0][:minLen]
