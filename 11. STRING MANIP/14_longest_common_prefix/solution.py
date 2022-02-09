@@ -24,16 +24,12 @@ class Solution(object):
         # 知识点： min()函数可以有key argument 
 
         minLen= len(min(strs, key=len))
+        
         if not strs or minLen==0:
             return ""
         if len(strs) == 1:
             return strs[0]
 
-        # for str in strs:
-        #     minLen = min(minLen, len(str))
-        # if minLen == 0:
-        #     return ""
-        
         i = 0
         while i < len(strs)-1:
             if strs[i][:minLen] == strs[i+1][:minLen]:
