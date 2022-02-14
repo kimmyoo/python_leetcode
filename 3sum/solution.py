@@ -15,7 +15,6 @@ The solution set must not contain duplicate triplets.
 S = -1 0 1 2 -1 -4  ==> -4, -1, -1, 0, 1, 2
 
 """
-
 class Solution(object):
     def threeSum(self, nums):
         """
