@@ -30,3 +30,28 @@ class Solution(object):
                 hashSet.remove(s[i])
                 i+=1
         return mx
+
+    def lengthOfLongestSubstring2(self, s):
+        """
+        :type s: str
+        :rtype: int
+        """
+        if not s:
+            return 0
+        i, j = 0, 0
+        m = 0
+        mySet = set()
+        while j < len(s):
+            if s[j] not in mySet:
+                mySet.add(s[j])
+                m = max(m, len(mySet))
+                j += 1
+            else:
+                mySet.remove(s[i])
+                i = i + 1
+        m = max(m, len(mySet))
+        return m
+
+s = Solution()
+res = s.lengthOfLongestSubstring2("abcdefffvfffgacdejin")
+print(res)
