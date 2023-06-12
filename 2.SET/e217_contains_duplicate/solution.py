@@ -29,17 +29,17 @@ class Solution(object):
         """
         if len(nums) == 0:
             return False
-        #O（nlog(n)）
+        #O（nlog(n)
         nums.sort()
         #O (n)
         for i in range(0, len(nums)-1):
             if nums[i] == nums[i+1]:
                 return True
         return False
-#test is important and it goes here
+
+
 test_array_a = [5, 10, 2018, 22, 33, 3]
 test_array_b = [3, 2, 1, 1]
-
 s = Solution()
 res1 = s.containsDuplicate(test_array_a)
 res2 = s.containsDuplicate(test_array_b)

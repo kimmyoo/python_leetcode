@@ -43,7 +43,37 @@ class Solution(object):
             for i in range(0, count_dict[key]):
                 res.append(key)
         return res
+    
+    def commonChars2(self, words):
+        """
+        :type words: List[str]
+        :rtype: List[str]
+        """
+        # for counting occurence of each letter
+        d = {}
+        commonSet = set(words[0])
+        res = []
 
+        # loop thru list and find intersection of each individual word
+        # if no intersection, return a empty []
+        for i in range(1, len(words)):
+            commonSet = commonSet & set(words[i])
+            # if there is intersection
+            if len(commonSet) != 0:
+                i += 1
+            else:
+                return []
+        
+        for letter in commonSet:
+            commonCount = words[0].count(letter)
+            for i in range(1, len(words)):
+                commonCount = min(commonCount, words[i].count(letter))
+            d[letter] = commonCount
+
+        for key in d:
+            for i in range(0, d[key]):
+                res.append(key)
+        return res
 #test
 s = Solution()
 arr = ["boomtt", "boatt", "aboutt"]

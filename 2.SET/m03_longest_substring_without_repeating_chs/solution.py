@@ -20,8 +20,9 @@ class Solution(object):
         hashSet = set()
         while j < len(s):
             #within the while loop, the adding and the deletion of a ch in current set
-            #is control by if ... else... logic which means:
-            #if you don't delete the repeating ch, you won't be able to add a new ch in to set
+            #is control by if ... else... logic
+            # if a char in set already, remember to delete the repeating ch which appears at index i
+            # in next loop, you will add the same char in the set
             if s[j] not in hashSet:
                 hashSet.add(s[j])
                 mx = max(mx, len(hashSet))
@@ -31,27 +32,7 @@ class Solution(object):
                 i+=1
         return mx
 
-    def lengthOfLongestSubstring2(self, s):
-        """
-        :type s: str
-        :rtype: int
-        """
-        if not s:
-            return 0
-        i, j = 0, 0
-        m = 0
-        mySet = set()
-        while j < len(s):
-            if s[j] not in mySet:
-                mySet.add(s[j])
-                m = max(m, len(mySet))
-                j += 1
-            else:
-                mySet.remove(s[i])
-                i = i + 1
-        m = max(m, len(mySet))
-        return m
 
 s = Solution()
-res = s.lengthOfLongestSubstring2("abcdefffvfffgacdejin")
+res = s.lengthOfLongestSubstring("abcdefffvfffgacdejin")
 print(res)
