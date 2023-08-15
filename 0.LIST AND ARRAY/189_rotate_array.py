@@ -1,3 +1,9 @@
+# Given an array, rotate the array to 
+# the right by k steps, where k is non-negative.
+# Follow up: Try to come up with an algorithm 
+# that uses O(1) extra space complexity and 
+# performs in linear time.
+
 class Solution:      
     def rotate(self, nums, k):
         n = len(nums)

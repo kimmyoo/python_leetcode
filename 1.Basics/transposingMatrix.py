@@ -4,8 +4,6 @@ def transpose1 (m):
     
     w = len(m[0])
     h = len(m)
-    print([None] * 10)
-    print([[None] for p in range(3)])
     result = [[None] * h for i in range(w)]
     for i in range(h):
         for j in range(w):
