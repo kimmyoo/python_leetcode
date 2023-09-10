@@ -22,9 +22,9 @@ class Solution(object):
         
         while curr:
             nxt = curr.next
-            curr.next = prev
+            curr.next = prev # 箭头换方向了
             prev = curr
-            curr = nxt
+            curr = nxt # curr 最后来改变
         head = prev
         return head
 

@@ -41,6 +41,21 @@ class Trie:
             current = current.children[letter]
         return True
 
+    # try to find the shortest root matching current word; 
+    # different from startWith it returns the prefix if found. 
+    def findPrefix(self, original):
+        output = ''
+        cur = self.root
+        for ch in original:
+            if ch not in cur.children:
+                break
+            cur = cur.children[ch]
+            output += ch
+            # this is to ensure it will return the first met root(shortest)
+            if cur.isWord:
+                return output
+        return original
+
 
 obj = Trie()
 obj.insert("apple")

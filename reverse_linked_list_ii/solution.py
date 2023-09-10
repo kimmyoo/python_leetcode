@@ -55,6 +55,40 @@ class Solution:
         
         rev_end.next = walk # connect the end of reverse part to current walk node
         return res
+    
+    """
+    two passes, turn this problem into a partial list reversal 
+    kind of cheating
+    """
+    def reverseBetween2(self, head, left, right):
+        """
+        :type head: ListNode
+        :type left: int
+        :type right: int
+        :rtype: ListNode
+        """
+        walk = head 
+        original = []
+
+        while walk: 
+            original.append(walk.val)
+            walk = walk.next
+        
+        left-=1
+
+        original[left:right] = original[left:right][::-1]
+
+        walk = head
+        for i in range(len(original)):
+            walk.val = original[i]
+            walk = walk.next
+        
+        return head
+        
+
+
+
+
 # test 
 tail = ListNode(0, None)
 node3 = ListNode(1, tail)
@@ -69,7 +103,7 @@ def display(head_node):
 
 display(head)
 s = Solution()
-s.reverseBetween(head, 2, 3)
+s.reverseBetween2(head, 2, 3)
 print("after reversing:")
 display(head)
 
