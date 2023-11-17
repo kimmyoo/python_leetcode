@@ -1,13 +1,9 @@
 # Definition for a binary tree node.
-class TreeNode:
-    def __init__(self, val=0, left=None, right=None):
-        self.val = val
-        self.left = left
-        self.right = right
+from treeSetup import Codec, preOrderTraversalDisplay, TreeNode
 
 
 class Solution:
-    def inorderTraversal(self, root)
+    def inorderTraversalToArray(self, root):
         """
         :type root: TreeNode
         :rtype: List[int]
@@ -22,3 +18,66 @@ class Solution:
         res = []
 
         return inorder(root, res)
+
+    # iterative
+    def inorderTraversal2(self, root):
+        """
+        :type root: TreeNode
+        :rtype: List[int]
+        """
+        
+        res = []
+        if not root: 
+            return res
+        
+        stack = []
+
+        curNode = root
+        while curNode or stack:
+            # this while loop end when encouters None
+            while curNode:
+                stack.append(curNode)
+                curNode = curNode.left
+            curNode = stack.pop()
+            res.append(curNode.val)
+            curNode = curNode.right
+        
+        return res
+
+    # iterative 
+    def preorder_traversal(self, root):
+        res = []
+        if not root:
+            return res
+    
+        stack = [root]
+        while stack:
+            curr_node = stack.pop()
+            res.append(curr_node.val)
+            # put root.right to bottom of stack
+            # so our left subtree of current node is on top
+            if curr_node.right:
+                stack.append(curr_node.right)
+            if curr_node.left:
+                stack.append(curr_node.left)
+        return res
+    
+
+
+
+
+
+
+
+
+arr = ["10", "5", "3", "None", "None", "7", "None", "None", "15", "None", "None", "20", "None", "None"]
+
+ser = Codec()
+deser = Codec()
+root = ser.preorderBuildFromArray(arr)
+
+serializedTree = ser.serialize(root)
+print("serialized:", serializedTree)
+deserializedTree = deser.deserialize(serializedTree)
+
+preOrderTraversalDisplay(deserializedTree)

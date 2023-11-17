@@ -4,7 +4,6 @@
 #         self.val = x
 #         self.left = None
 #         self.right = None
-from __builtin__ import False
 
 class Solution(object):
     def isValidBST_A(self, root):
