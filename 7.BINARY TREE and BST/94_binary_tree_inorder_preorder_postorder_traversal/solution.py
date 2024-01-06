@@ -62,6 +62,15 @@ class Solution:
                 stack.append(curr_node.left)
         return res
     
+    def recursivePreorderTraversal(self, root):
+        res = []
+        def helper(root, container):
+            if root:
+                container.append(root.val)
+                helper(root.left, container)
+                helper(root.right, container)
+        helper(root, res)
+        return res
 
 
 

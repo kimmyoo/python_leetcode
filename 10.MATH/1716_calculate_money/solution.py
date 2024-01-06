@@ -17,7 +17,6 @@ class Solution:
             return sum
         
 
-
 s = Solution()
 res=s.totalMoney(199)
 print(res)
