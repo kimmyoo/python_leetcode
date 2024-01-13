@@ -31,7 +31,6 @@ class Solution(object):
         :type nums: List[int]
         :rtype: TreeNode
         """
-        
         def helper(left, right):
             if left > right:
                 return None
@@ -41,6 +40,21 @@ class Solution(object):
             node.right = helper(mid+1, right)
             return node
         return helper(0, len(nums)-1)
+    
+    # this one involves list slicing which is slower compared with the first one
+    # which uses index in recursive calls. 
+    # remember the nums here must be sorted. 注意审题
+    def sortedArrayToBST2(self, nums):
+        if not nums:
+            return None
+        # floor division to find mid index, edge case is 1//2 which is 0
+        # which is still within valid index range
+        mid = len(nums) // 2
+        node = TreeNode(nums[mid])
+        node.left = self.sortedArrayToBST2(nums[:mid-1])
+        node.right = self.sortedArrayToBST2(nums[mid+1:])
+        return node
+
 
 
 
