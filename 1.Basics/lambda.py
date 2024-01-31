@@ -10,7 +10,7 @@ if __name__ == "__main__":
 
     # value after : will be returned
     # printItself is the reference to the lambda function
-    # see the following example 
+    # see the following example
     printItself = lambda x: x
     anotherPrintItself = printItself
     print(printItself(5))
